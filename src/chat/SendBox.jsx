@@ -1,13 +1,16 @@
 import React, { memo, useState } from "react";
+import { sendMessage } from "../../services/firebase";
+import { useAuth } from "../../hooks/useAuth";
 
 const SendBox = (props) => {
+  const { user } = useAuth();
   const [mediaRecorder, setMediaRecorder] = useState(undefined);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const messageField = props.messageBoxRef.current;
     if (messageField && messageField.value) {
-      props.handleSendMessage(messageField.value);
+      sendMessage(user, messageField.value);
       messageField.value = "";
     }
   };
@@ -41,7 +44,7 @@ const SendBox = (props) => {
         fileReader.readAsDataURL(audioBlob);
         fileReader.onloadend = function () {
           const base64VoiceMsgString = fileReader.result;
-          props.handleSendMessage(base64VoiceMsgString);
+          sendMessage(user, base64VoiceMsgString);
         };
       });
 

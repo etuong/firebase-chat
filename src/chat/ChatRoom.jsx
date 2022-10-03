@@ -8,9 +8,10 @@ import Participants from "./Participants";
 import React, { useEffect, useRef, useState } from "react";
 import SendBox from "./SendBox";
 import YourMessage from "./YourMessage";
-import useChat from "../hooks/useChat";
 import useTyping from "../hooks/useTyping";
 import Welcome from "./Welcome";
+import { sendMessage } from "../../services/firebase";
+import useMessages from "../hooks/useMessage";
 
 const renderMessage = (message, index, showSender, fontSize) => {
   if (!message || !message.text) {
@@ -55,36 +56,20 @@ const Chat = () => {
   const [showPreferences, setShowPreferences] = useState(true);
   const [showSender, setShowSender] = useState(true);
   const [fontSize, setFontSize] = useState("16px");
+  const messages = useMessages();
 
-  const {
-    messages,
-    participant,
-    participants,
-    typingParticipants,
-    sendMessage,
-    startTypingMessage,
-    stopTypingMessage,
-    updateParticipantProfile,
-  } = useChat();
+  // const { isTyping, startTyping, stopTyping, cancelTyping } = useTyping();
 
-  const { isTyping, startTyping, stopTyping, cancelTyping } = useTyping();
+  // useEffect(() => {
+  //   if (isTyping) startTypingMessage();
+  //   else stopTypingMessage();
+  // }, [isTyping]);
 
-  useEffect(() => {
-    if (isTyping) startTypingMessage();
-    else stopTypingMessage();
-  }, [isTyping]);
-
-  useEffect(() => {
-    chatBoxRef.current.addEventListener("DOMNodeInserted", (event) => {
-      const { currentTarget: target } = event;
-      target.scroll({ top: target.scrollHeight, behavior: "smooth" });
-    });
-  }, []);
-
-  const handleSendMessage = (newMessage) => {
-    cancelTyping();
-    sendMessage(newMessage);
-  };
+  React.useLayoutEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  });
 
   const handleSaveChat = () => {
     var blob = new Blob(
@@ -157,18 +142,17 @@ const Chat = () => {
               messages.map((message, index) =>
                 renderMessage(message, index, showSender, fontSize)
               )}
-            {typingParticipants &&
+            {/* {typingParticipants &&
               typingParticipants.map((typist, index) => (
                 <li key={index}>
                   <MessageTyping typist={typist} />
                 </li>
-              ))}
+              ))} */}
           </ul>
         </div>
 
         <SendBox
           messageBoxRef={messageBoxRef}
-          handleSendMessage={handleSendMessage}
           startTyping={startTyping}
           stopTyping={stopTyping}
         />
