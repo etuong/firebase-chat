@@ -1,6 +1,6 @@
 import EmojiPicker from "emoji-picker-react";
 import React, { memo, useState, useId } from "react";
-import { uploadImage } from "utility/ImageUtility";
+import { uploadImage } from "../utility/ImageUtility";
 import ImagePicker from "./ImagePicker";
 import Preferences from "./Preferences";
 import Questions from "./Questions";

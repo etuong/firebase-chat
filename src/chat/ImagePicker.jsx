@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useRef } from "react";
-import { uploadImage } from "utility/ImageUtility";
+import { uploadImage } from "../utility/ImageUtility";
 
 const ImagePicker = ({ tag, isProfileCloud, callback }) => {
   const imageInputRef = useRef(null);

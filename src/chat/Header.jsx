@@ -1,11 +1,11 @@
 import React, { memo } from "react";
 
-const ChatHeader = () => {
+const Header = () => {
   return (
     <React.Fragment>
-      <p>Test!</p>
+      <b className="name">Test!</b>
     </React.Fragment>
   );
 };
 
-export default memo(ChatHeader);
+export default memo(Header);

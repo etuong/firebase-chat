@@ -1,8 +1,8 @@
 import FileSaver from "file-saver";
 import React, { useRef, useState } from "react";
-import { sendMessage } from "../../services/firebase";
-import useMessages from "../hooks/useMessage";
-import ChatHeader from "./ChatHeader";
+import { sendMessage } from "../services/Firebase";
+import { useMessages } from "../hooks/useMessages";
+import Header from "./Header";
 import Features from "./Features";
 import Message from "./Message";
 import MyMessage from "./MyMessage";
@@ -52,7 +52,7 @@ const Chat = () => {
   const messageBoxRef = useRef();
   const [showSender, setShowSender] = useState(true);
   const [fontSize, setFontSize] = useState("16px");
-  const messages = useMessages();
+  const messages = undefined; //useMessages();
 
   React.useLayoutEffect(() => {
     if (chatBoxRef.current) {
@@ -82,8 +82,8 @@ const Chat = () => {
     <div className="chat-app">
       <Welcome />
       <div className="chat">
-        <div className="chat-header clearfix">
-          <ChatHeader />
+        <div className="header clearfix">
+          <Header />
           <Features
             messageBoxRef={messageBoxRef}
             handleSaveChat={handleSaveChat}

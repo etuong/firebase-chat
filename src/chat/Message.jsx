@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { getTransformedImage, isImageLink } from "utility/ImageUtility";
+import { getTransformedImage, isImageLink } from "../utility/ImageUtility";
 
 const renderImageMessage = (text) => {
   return (

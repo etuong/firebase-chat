@@ -38,38 +38,15 @@ body,
     display: flex;
     flex-direction: column;
 
-    .chat-header {
-      padding: 10px 10px 0px 10px;
+    .header {
+      padding: 10px;
       border-bottom: 2px solid #f4f7f6;
       display: flex;
       align-items: center;
 
-      span.pencil {
-        cursor: pointer;
-        margin: 0px 5px;
-        font-size: large;
-        &.edit {
-          color: darkgoldenrod;
-        }
-        &.notEdit {
-          color: darkorange;
-        }
-      }
-
       .name {
-        font-weight: bold;
         font-size: large;
-        float: left;
         margin-left: 10px;
-        input[type="text"] {
-          width: 192px;
-        }
-
-        .editing {
-          background: transparent;
-          outline: 0;
-          border-width: 0 0 2px;
-        }
       }
 
       .features {
@@ -495,7 +472,7 @@ div.deliver {
       padding: 10px !important;
     }
 
-    .chat-header {
+    .header {
       .name {
         input[type="text"] {
           width: 160px !important;

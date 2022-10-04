@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
-import { sendMessage } from "../../services/firebase";
-import { useAuth } from "../../hooks/useAuth";
+import { sendMessage } from "../services/Firebase";
+import { useAuth } from "../hooks/useAuth";
 
 const SendBox = (props) => {
   const { user } = useAuth();
