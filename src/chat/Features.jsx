@@ -10,12 +10,10 @@ const Features = ({
   messageBoxRef,
   handleSaveChat,
   sendMessage,
-  setShowPreferences,
-  showPreferences,
   showSender,
   setShowSender,
   fontSize,
-  setFontSize
+  setFontSize,
 }) => {
   const [showPicker, setShowPicker] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,8 +78,6 @@ const Features = ({
       </button>
 
       <Preferences
-        showPreferences={showPreferences}
-        setShowPreferences={setShowPreferences}
         showSender={showSender}
         setShowSender={setShowSender}
         fontSize={fontSize}

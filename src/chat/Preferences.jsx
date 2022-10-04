@@ -35,14 +35,6 @@ const Preferences = (props) => (
         <div className="content">
           <div className="preference-item">
             <Toggle
-              id="show-participants"
-              defaultChecked={props.showPreferences}
-              onChange={(_e) => props.setShowPreferences()}
-            />
-            <label htmlFor="show-participants">Show Participants</label>
-          </div>
-          <div className="preference-item">
-            <Toggle
               id="show-senders"
               defaultChecked={props.showSender}
               onChange={(_e) => props.setShowSender()}
