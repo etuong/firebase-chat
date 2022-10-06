@@ -47,7 +47,7 @@ const renderMessage = (message, index, showSender, fontSize) => {
   );
 };
 
-const Chat = () => {
+const ChatRoom = () => {
   const chatBoxRef = useRef();
   const messageBoxRef = useRef();
   const [showSender, setShowSender] = useState(true);
@@ -110,4 +110,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default ChatRoom;

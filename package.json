@@ -8,6 +8,7 @@
     "eslint": "^8.20.0",
     "file-saver": "^2.0.5",
     "firebase": "^9.10.0",
+    "firebaseui": "^0.600.0",
     "font-awesome": "^4.7.0",
     "rc-slider": "^10.0.1",
     "react": "^18.2.0",
@@ -18,8 +19,7 @@
     "react-webcam": "^7.0.1",
     "reactjs-popup": "^2.0.5",
     "sass": "^1.54.0",
-    "sweetalert2": "^11.4.26",
-    "sweetalert2-react-content": "^5.0.2"
+    "sweetalert2": "^11.4.26"
   },
   "scripts": {
     "start": "react-scripts start",
