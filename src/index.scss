@@ -23,6 +23,16 @@ body,
   border-radius: 50%;
 }
 
+@mixin send-tools {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
 .chat-app {
   height: 100%;
   background: whitesmoke;
@@ -66,27 +76,6 @@ body,
             height: 100%;
             width: 100%;
           }
-        }
-      }
-    }
-
-    .chat-participants-container {
-      border-bottom: 2px solid #f4f7f6;
-
-      .participants-title-desc {
-        font-size: 12px;
-        margin-left: 10px;
-        margin-top: 5px;
-        margin-bottom: 0px;
-      }
-
-      .chat-participants {
-        display: flex;
-        flex-wrap: wrap;
-
-        .participant {
-          @include avatar(40px);
-          margin: 4px;
         }
       }
     }
@@ -321,6 +310,7 @@ body,
       right: -2vmin;
       top: -2vmin;
     }
+
     &:after {
       border-radius: 2px;
       bottom: -2.5vmin;
@@ -331,6 +321,7 @@ body,
       right: -2.5vmin;
       top: -2.5vmin;
     }
+
     .selfie {
       --b: 10px; /* control the size */
       padding: var(--b);
@@ -397,17 +388,12 @@ body,
 
     .welcome-item {
       margin: 15px 5px;
-      &.welcome-flex {
-        display: flex;
-        .welcome-avatar {
-          margin-right: 10px;
-        }
-        .welcome-avatar-text {
-          align-self: center;
-          width: 80%;
+    
+        .login {
+          background: var(--color-blue);
+          padding: 16px;
         }
       }
-    }
   }
 }
 
@@ -415,15 +401,6 @@ body,
   display: none;
 }
 
-@mixin send-tools {
-  width: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #e9ecef;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-}
 div.microphone {
   @include send-tools;
   margin-right: -1px;
@@ -452,6 +429,7 @@ div.deliver {
     box-shadow: 0 0 0 10px rgba(23, 154, 29, 0.2);
   }
 }
+
 .profile {
   @include avatar(60px);
   cursor: pointer;
@@ -470,17 +448,6 @@ div.deliver {
 
     .chat-history {
       padding: 10px !important;
-    }
-
-    .header {
-      .name {
-        input[type="text"] {
-          width: 160px !important;
-        }
-      }
-      .features {
-        width: 130px;
-      }
     }
   }
 }
