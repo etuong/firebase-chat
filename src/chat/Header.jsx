@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { useAuth } from "../hooks/useAuth";
+import  useAuth  from "../hooks/useAuth";
 
 const Header = () => {
   const { user } = useAuth();

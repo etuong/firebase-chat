@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@firebase/app-compat": "^0.1.35",
+    "@firebase/auth-compat": "^0.2.21",
     "bootstrap": "4.0.0",
     "emoji-picker-react": "^3.6.0",
     "eslint": "^8.20.0",

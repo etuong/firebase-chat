@@ -1,16 +1,15 @@
 import ChatRoom from "./chat/ChatRoom";
 import Authentication from "./chat/Authentication";
-import { useAuth } from "./hooks/useAuth";
+import  useAuth  from "./hooks/useAuth";
+import { useMemo } from "react";
 
 function App() {
   const { user } = useAuth();
 
-  return (
-    <>
-      <h1>💬 Chat Room</h1>
-      {user ? <ChatRoom /> : <Authentication />}
-    </>
-  );
+  return useMemo(() => {
+    console.log(user)
+    return <>{user ? <ChatRoom /> : <Authentication />}</>;
+  }, [user]);
 }
 
 export default App;

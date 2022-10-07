@@ -80,10 +80,10 @@ const ChatRoom = () => {
 
   return (
     <div className="chat-app">
-      <Welcome />
+      {/* <Welcome /> */}
       <div className="chat">
         <div className="header clearfix">
-          <Header />
+          {/* <Header /> */}
           <Features
             messageBoxRef={messageBoxRef}
             handleSaveChat={handleSaveChat}

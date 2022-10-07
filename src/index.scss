@@ -8,10 +8,23 @@
   box-sizing: border-box;
 }
 
+html {
+  background: whitesmoke;
+}
+
 html,
 body,
 #root {
   height: 100%;
+}
+
+body {
+  background: url("https://camo.githubusercontent.com/854a93c27d64274c4f8f5a0b6ec36ee1d053cfcd934eac6c63bed9eaef9764bd/68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131306234303866303735642e706e67");
+  background-blend-mode: soft-light;
+  background-color: #efeae2;
+  width: 35em;
+  margin: 0px auto;
+  border-left: 2px solid #eaeaea;
 }
 
 @mixin avatar($length) {
@@ -35,15 +48,8 @@ body,
 
 .chat-app {
   height: 100%;
-  background: whitesmoke;
 
   .chat {
-    background: url("https://camo.githubusercontent.com/854a93c27d64274c4f8f5a0b6ec36ee1d053cfcd934eac6c63bed9eaef9764bd/68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131306234303866303735642e706e67");
-    background-blend-mode: soft-light;
-    background-color: #efeae2;
-    width: 35em;
-    margin: 0px auto;
-    border-left: 2px solid #eaeaea;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -388,12 +394,12 @@ body,
 
     .welcome-item {
       margin: 15px 5px;
-    
-        .login {
-          background: var(--color-blue);
-          padding: 16px;
-        }
+
+      .login {
+        background: var(--color-blue);
+        padding: 16px;
       }
+    }
   }
 }
 
@@ -442,12 +448,12 @@ div.deliver {
   }
 }
 
-@media only screen and (max-width: 450px) {
-  .chat {
-    width: auto !important;
+.firebaseui-idp-button {
+  border-radius: 40px;
+}
 
-    .chat-history {
-      padding: 10px !important;
-    }
+@media only screen and (max-width: 450px) {
+  body {
+    width: auto !important;
   }
 }

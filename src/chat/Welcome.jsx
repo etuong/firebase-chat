@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Popup from "reactjs-popup";
-import { useAuth } from "../hooks/useAuth";
+import  useAuth  from "../hooks/useAuth";
 
 const Welcome = () => {
   const { login } = useAuth();

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { authUI, uiConfig } from "../services/Firebase";
 
 const Authentication = () => {
+  useEffect(() => {
+    authUI.start("#firebaseui-auth-container", uiConfig);
+  }, []);
+
   return (
     <>
-      <h1>Welcome to My Awesome App</h1>
+      <h4 style={{ textAlign: "center", paddingTop: "15px" }}>
+        Please sign in!
+      </h4>
       <div id="firebaseui-auth-container"></div>
     </>
   );

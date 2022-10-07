@@ -5,6 +5,7 @@ import ImagePicker from "./ImagePicker";
 import Preferences from "./Preferences";
 import Questions from "./Questions";
 import WebCamera from "./WebCamera";
+import firebase from "../services/Firebase";
 
 const Features = ({
   messageBoxRef,
@@ -92,6 +93,13 @@ const Features = ({
       </button>
 
       <Questions />
+
+      <button
+        className="btn btn-outline-dark"
+        onClick={(_e) => firebase.auth().signOut()}
+      >
+        <i className="fa fa-sign-out"></i>
+      </button>
     </div>
   );
 };

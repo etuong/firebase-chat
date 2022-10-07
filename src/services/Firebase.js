@@ -1,5 +1,4 @@
-import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import firebase from "firebase/compat/app";
 import {
   getFirestore,
   collection,
@@ -9,6 +8,8 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
+import * as firebaseui from "firebaseui";
+import "firebase/compat/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -20,24 +21,21 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_measurementId,
 };
 
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-export const loginWithGoogle = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-
-    const { user } = await signInWithPopup(auth, provider);
-
-    return { uid: user.uid, displayName: user.displayName };
-  } catch (error) {
-    if (error.code !== "auth/cancelled-popup-request") {
-      console.error(error);
-    }
-    return null;
-  }
+export const uiConfig = {
+  signInSuccessUrl: "/",
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    new firebase.auth.OAuthProvider("yahoo.com").providerId,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+  ],
 };
+
+export const authUI = new firebaseui.auth.AuthUI(firebase.auth());
 
 export const sendMessage = async (user, text) => {
   try {
@@ -68,3 +66,5 @@ export const getMessages = (callback) => {
     }
   );
 };
+
+export default firebase;
