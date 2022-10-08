@@ -39,7 +39,7 @@ export const authUI = new firebaseui.auth.AuthUI(firebase.auth());
 
 export const sendMessage = async (user, text) => {
   try {
-    await addDoc(collection(db, "chat-rooms", "messages"), {
+    await addDoc(collection(db, "messages"), {
       uid: user.uid,
       displayName: user.displayName,
       text: text.trim(),
@@ -52,10 +52,7 @@ export const sendMessage = async (user, text) => {
 
 export const getMessages = (callback) => {
   return onSnapshot(
-    query(
-      collection(db, "chat-rooms", "messages"),
-      orderBy("timestamp", "asc")
-    ),
+    query(collection(db, "messages"), orderBy("timestamp", "asc")),
     (querySnapshot) => {
       const messages = querySnapshot.docs.map((doc) => ({
         id: doc.id,

@@ -34,14 +34,6 @@ const Preferences = (props) => (
         <div className="header">Preferences</div>
         <div className="content">
           <div className="preference-item">
-            <Toggle
-              id="show-senders"
-              defaultChecked={props.showSender}
-              onChange={(_e) => props.setShowSender()}
-            />
-            <label htmlFor="show-senders">Show Senders</label>
-          </div>
-          <div className="preference-item">
             <p>Font Size</p>
             <Slider
               marks={marks}

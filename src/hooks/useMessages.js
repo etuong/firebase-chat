@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getMessages } from "../services/Firebase";
 
 export const useMessages = () => {
   const [messages, setMessages] = React.useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const unsubscribe = getMessages(setMessages);
 
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return messages;

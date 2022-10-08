@@ -113,10 +113,6 @@ body {
               justify-content: end;
             }
 
-            .sender {
-              @include avatar(40px);
-            }
-
             .message-data-time {
               color: #434651;
               font-size: 10px;

@@ -5,9 +5,9 @@ const Header = () => {
   const { user } = useAuth();
 
   return (
-    <React.Fragment>
-      <b className="name">{user}</b>
-    </React.Fragment>
+    <>
+      <b className="name">{user.displayName}</b>
+    </>
   );
 };
 

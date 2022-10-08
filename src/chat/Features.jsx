@@ -11,8 +11,6 @@ const Features = ({
   messageBoxRef,
   handleSaveChat,
   sendMessage,
-  showSender,
-  setShowSender,
   fontSize,
   setFontSize,
 }) => {
@@ -79,8 +77,6 @@ const Features = ({
       </button>
 
       <Preferences
-        showSender={showSender}
-        setShowSender={setShowSender}
         fontSize={fontSize}
         setFontSize={setFontSize}
       />
