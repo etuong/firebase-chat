@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef } from "react";
-import { uploadImage } from "../utility/ImageUtility";
+import { sendImage } from "../services/Firebase";
 
-const ImagePicker = ({ tag, isProfileCloud, callback }) => {
+const ImagePicker = ({ tag, callback }) => {
   const imageInputRef = useRef(null);
 
   useEffect(() => {
@@ -18,7 +18,8 @@ const ImagePicker = ({ tag, isProfileCloud, callback }) => {
 
   function processImageData() {
     const file = imageInputRef.current.files[0];
-    uploadImage(file, isProfileCloud, callback);
+    sendImage(file);
+    // uploadImage(file, isProfileCloud, callback);
   }
 
   return <input type="file" ref={imageInputRef} accept="image/*" id={tag} />;

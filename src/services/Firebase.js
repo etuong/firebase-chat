@@ -3,13 +3,13 @@ import {
   getFirestore,
   collection,
   addDoc,
-  serverTimestamp,
   onSnapshot,
   query,
   orderBy,
 } from "firebase/firestore";
 import * as firebaseui from "firebaseui";
 import "firebase/compat/auth";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -37,13 +37,30 @@ export const uiConfig = {
 
 export const authUI = new firebaseui.auth.AuthUI(firebase.auth());
 
+const storage = getStorage();
+
+export const sendImage = async (user, image) => {
+  const storageRef = ref(storage, 'bucket');
+  uploadBytes(storageRef, image).then((snapshot) => {
+    console.log(snapshot);
+  });
+};
+
 export const sendMessage = async (user, text) => {
   try {
     await addDoc(collection(db, "messages"), {
       uid: user.uid,
       displayName: user.displayName,
       text: text.trim(),
-      timestamp: serverTimestamp(),
+      timestamp: new Date().toLocaleDateString("en-us", {
+        timeZone: "America/Los_Angeles",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        hour12: true,
+        minute: "numeric",
+      }),
     });
   } catch (error) {
     console.error(error);

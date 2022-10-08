@@ -1,5 +1,4 @@
 import React from "react";
-import Toggle from "react-toggle";
 import Popup from "reactjs-popup";
 import Slider from "../../node_modules/rc-slider/lib/Slider";
 

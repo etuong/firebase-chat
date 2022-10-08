@@ -27,15 +27,8 @@ const Questions = () => (
             other out.
           </p>
           <p>
-            The first time you enter the chatroom you will be given a random
-            avatar and profile name. Go ahead and personalize them if you want!
-            This chat also supports HTML.
-            <code> &lt;h1&gt;Try me!&lt;/h1&gt; </code>
-            will give you a larger header.
-          </p>
-          <p>
-            Messages are stored on my Mongo database server and will be deleted
-            once in a while. Your information is absolutely anonymous.
+            Messages are stored on my Firebase server and will be deleted
+            monthly. Your information is absolutely anonymous.
           </p>
           <p>
             This web app was designed and built by{" "}
@@ -49,7 +42,7 @@ const Questions = () => (
             . If you are a developer and would like to contribute to this
             project, please visit the{" "}
             <a
-              href="https://github.com/etuong/chat-with-me"
+              href="https://github.com/etuong/firebase-chat"
               target="_blank"
               rel="noreferrer"
             >
@@ -58,13 +51,12 @@ const Questions = () => (
             . Thank you!
           </p>
           <div>
-            <span>Tech Stack:</span>
+            <b>House rules</b>
             <ul>
-              <li>React</li>
-              <li>Node.js and Express</li>
-              <li>MongoDB</li>
-              <li>Socket.io</li>
-              <li>Cloudinary</li>
+              <li>Be respectful</li>
+              <li>No profanity</li>
+              <li>No nudity</li>
+              <li>Have fun!</li>
             </ul>
           </div>
         </div>

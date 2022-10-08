@@ -3,17 +3,9 @@ import { getTransformedImage, isImageLink } from "../utility/ImageUtility";
 
 const renderImageMessage = (text) => {
   return (
-    <React.Fragment>
-      {text.includes("cloudinary") ? (
-        <a target="_blank" href={text} rel="noreferrer">
-          <img src={getTransformedImage(text)} alt="" />
-        </a>
-      ) : (
-        <a target="_blank" href={text} rel="noreferrer">
-          <img src={text} alt="" width="200" />
-        </a>
-      )}
-    </React.Fragment>
+    <a target="_blank" href={text} rel="noreferrer">
+      <img src={text} alt="" width="200" />
+    </a>
   );
 };
 
@@ -23,19 +15,19 @@ const cleanseMessage = (text) => {
     .replaceAll("\n", "<br/>");
 };
 
-const Message = ({ text, isMine, fontSize }) => {
+const Message = ({ text, fromMe, fontSize }) => {
   return (
     <React.Fragment>
       {isImageLink(text) ? (
         renderImageMessage(text)
       ) : (
-        <div
-          className={`message ${isMine ? "my-message" : "other-message"}`}
+        <span
+          className={["message", fromMe && "my-message"].join(" ")}
           style={{ fontSize: `${fontSize}` }}
           dangerouslySetInnerHTML={{
             __html: cleanseMessage(text),
           }}
-        ></div>
+        ></span>
       )}
     </React.Fragment>
   );

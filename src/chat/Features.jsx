@@ -1,11 +1,11 @@
 import EmojiPicker from "emoji-picker-react";
 import React, { memo, useState, useId } from "react";
-import { uploadImage } from "../utility/ImageUtility";
 import ImagePicker from "./ImagePicker";
 import Preferences from "./Preferences";
 import Questions from "./Questions";
 import WebCamera from "./WebCamera";
 import firebase from "../services/Firebase";
+import { sendImage } from "../services/Firebase";
 
 const Features = ({
   messageBoxRef,
@@ -47,13 +47,12 @@ const Features = ({
       <WebCamera
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
-        callback={(selfie) => uploadImage(selfie, false, sendMessage)}
+        callback={(selfie) => sendImage(selfie)}
       />
 
       <ImagePicker
         tag={imagePickerId}
         callback={sendMessage}
-        isProfileCloud={false}
       />
 
       <button

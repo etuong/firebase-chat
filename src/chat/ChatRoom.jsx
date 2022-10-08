@@ -5,7 +5,7 @@ import { sendMessage } from "../services/Firebase";
 import Features from "./Features";
 import Header from "./Header";
 import SendBox from "./SendBox";
-import MessageList from "./MessageList";
+import Messages from "./Messages";
 
 const ChatRoom = () => {
   const chatBoxRef = useRef();
@@ -40,7 +40,7 @@ const ChatRoom = () => {
   return (
     <div className="chat-app">
       <div className="chat">
-        <div className="header clearfix">
+        <div className="header">
           <Header />
           <Features
             messageBoxRef={messageBoxRef}
@@ -51,10 +51,8 @@ const ChatRoom = () => {
           />
         </div>
 
-        <div className="chat-history" ref={chatBoxRef}>
-          <ul className="m-b-0">
-            {<MessageList fontSize={fontSize} />}
-          </ul>
+        <div className="chat-box m-b-0" ref={chatBoxRef}>
+          {<Messages fontSize={fontSize} />}
         </div>
 
         <SendBox messageBoxRef={messageBoxRef} />

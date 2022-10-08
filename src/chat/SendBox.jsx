@@ -16,7 +16,6 @@ const SendBox = (props) => {
   };
 
   const onKeyDown = (e) => {
-    props.startTyping();
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
       handleSubmit(e);
@@ -60,7 +59,7 @@ const SendBox = (props) => {
   };
 
   return (
-    <div className="chat-message clearfix">
+    <div className="send-message">
       <form onSubmit={handleSubmit}>
         <div className="input-group mb-0">
           <div
@@ -76,7 +75,6 @@ const SendBox = (props) => {
             ref={props.messageBoxRef}
             className="form-control"
             placeholder="Enter message here..."
-            onKeyUp={props.stopTyping}
             onKeyDown={onKeyDown}
           />
           <div className="deliver" onClick={handleSubmit}>
