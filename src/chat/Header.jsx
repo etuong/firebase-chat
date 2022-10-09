@@ -6,12 +6,14 @@ const Header = () => {
 
   return (
     <>
-      <div
-        className="sender"
-        style={{
-          backgroundImage: `url(${user.photoURL})`,
-        }}
-      ></div>
+      {user.photoURL && (
+        <div
+          className="sender"
+          style={{
+            backgroundImage: `url(${user.photoURL})`,
+          }}
+        ></div>
+      )}
       <b className="name">{user.displayName}</b>
     </>
   );

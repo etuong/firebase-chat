@@ -1,10 +1,14 @@
 import React, { memo, useEffect, useRef } from "react";
-import { sendImage } from "../services/Firebase";
 
 const ImagePicker = ({ tag, callback }) => {
   const imageInputRef = useRef(null);
 
   useEffect(() => {
+    const processImageData = () => {
+      const file = imageInputRef.current.files[0];
+      callback(file);
+    };
+
     const element = imageInputRef.current;
 
     if (element) {
@@ -14,13 +18,7 @@ const ImagePicker = ({ tag, callback }) => {
         element.removeEventListener("change", processImageData);
       };
     }
-  }, [imageInputRef]);
-
-  function processImageData() {
-    const file = imageInputRef.current.files[0];
-    sendImage(file);
-    // uploadImage(file, isProfileCloud, callback);
-  }
+  }, [callback, imageInputRef]);
 
   return <input type="file" ref={imageInputRef} accept="image/*" id={tag} />;
 };

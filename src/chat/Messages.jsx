@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { useMessages } from "../hooks/useMessages";
 import Message from "./Message";
+import { isAudio } from "../utility/AudioUtility";
 
-const Messages = ({ fontSize }) => {
+const Messages = ({ fontSize, showSender }) => {
+  const chatBoxRef = useRef();
   const { user } = useAuth();
   const messages = useMessages();
 
+  useLayoutEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  });
+
   return (
-    <>
+    <div className="chat-box m-b-0" ref={chatBoxRef}>
       {messages.map((message, index) => {
         const { uid, text, displayName, timestamp } = message;
         const fromMe = uid === user.uid;
         let audioSource = undefined;
 
-        if (text.includes("data:application/octet-stream;base64")) {
+        if (isAudio(text)) {
           audioSource = text.split(";");
           audioSource[0] = "data:audio/mp3;";
           audioSource = audioSource[0] + audioSource[1];
@@ -23,8 +31,8 @@ const Messages = ({ fontSize }) => {
         return (
           <div
             key={index}
-            className={["chat-message", fromMe && "flush-right"].join(" ")}
-          >
+            className={["chat-message-wrapper", fromMe && "flush-right"].join(" ")}
+          >            
             {audioSource ? (
               <audio controls>
                 <source src={audioSource} type="audio/mp3" />
@@ -35,16 +43,20 @@ const Messages = ({ fontSize }) => {
               <Message text={text} fromMe={fromMe} fontSize={fontSize} />
             )}
 
-            <span
-              className={["message-data", fromMe && "justify-right"].join(" ")}
-            >
-              <span className="message-data-sender-name">{displayName}</span>
-              <span className="message-data-time">{timestamp}</span>
-            </span>
+            {showSender && (
+              <span
+                className={["message-data", fromMe && "justify-right"].join(
+                  " "
+                )}
+              >
+                <span className="message-data-sender-name">{displayName}</span>
+                <span className="message-data-time">{timestamp}</span>
+              </span>
+            )}
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 

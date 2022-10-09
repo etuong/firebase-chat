@@ -64,7 +64,7 @@ const WebCamera = ({ isModalOpen, setIsModalOpen, callback }) => {
                 }}
                 className="webcam-btn btn btn-outline-danger"
               >
-                Retake Image
+                Retake Selfie
               </button>
               <button
                 onClick={(e) => {
@@ -75,7 +75,7 @@ const WebCamera = ({ isModalOpen, setIsModalOpen, callback }) => {
                 }}
                 className="webcam-btn btn btn-outline-success"
               >
-                Send Image
+                Send Selfie
               </button>
             </React.Fragment>
           ) : (

@@ -6,10 +6,17 @@ import {
   onSnapshot,
   query,
   orderBy,
+  serverTimestamp,
 } from "firebase/firestore";
 import * as firebaseui from "firebaseui";
 import "firebase/compat/auth";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  uploadString,
+} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -27,6 +34,7 @@ export const uiConfig = {
   signInSuccessUrl: "/",
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     new firebase.auth.OAuthProvider("yahoo.com").providerId,
     firebase.auth.TwitterAuthProvider.PROVIDER_ID,
     firebase.auth.GithubAuthProvider.PROVIDER_ID,
@@ -40,9 +48,23 @@ export const authUI = new firebaseui.auth.AuthUI(firebase.auth());
 const storage = getStorage();
 
 export const sendImage = async (user, image) => {
-  const storageRef = ref(storage, 'bucket');
-  uploadBytes(storageRef, image).then((snapshot) => {
-    console.log(snapshot);
+  const storageRef = ref(
+    storage,
+    `${user.uid}-${Math.floor(Math.random() * 100)}`
+  );
+  let promise;
+
+  // This app supports selfies (data:image/jpeg;base64) and standard images
+  if (typeof image === "string" && image.includes("data:image/jpeg;base64,")) {
+    promise = uploadString(storageRef, image, "data_url");
+  } else {
+    promise = uploadBytes(storageRef, image);
+  }
+
+  promise.then((snapshot) => {
+    getDownloadURL(snapshot.ref).then((downloadURL) => {
+      sendMessage(user, downloadURL);
+    });
   });
 };
 
@@ -52,6 +74,7 @@ export const sendMessage = async (user, text) => {
       uid: user.uid,
       displayName: user.displayName,
       text: text.trim(),
+      serverTimestamp: serverTimestamp(),
       timestamp: new Date().toLocaleDateString("en-us", {
         timeZone: "America/Los_Angeles",
         year: "numeric",
@@ -69,7 +92,7 @@ export const sendMessage = async (user, text) => {
 
 export const getMessages = (callback) => {
   return onSnapshot(
-    query(collection(db, "messages"), orderBy("timestamp", "asc")),
+    query(collection(db, "messages"), orderBy("serverTimestamp", "asc")),
     (querySnapshot) => {
       const messages = querySnapshot.docs.map((doc) => ({
         id: doc.id,

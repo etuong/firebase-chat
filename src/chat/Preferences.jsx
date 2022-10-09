@@ -1,6 +1,7 @@
-import React from "react";
 import Popup from "reactjs-popup";
+import React from "react";
 import Slider from "../../node_modules/rc-slider/lib/Slider";
+import Toggle from "react-toggle";
 
 const marks = {
   0: "14px",
@@ -18,7 +19,7 @@ function getKeyByValue(value) {
 const Preferences = (props) => (
   <Popup
     trigger={
-      <button className="btn btn-outline-secondary">
+      <button className="btn btn-outline red" title="Change Settings">
         <i className="fa fa-cogs"></i>
       </button>
     }
@@ -32,6 +33,14 @@ const Preferences = (props) => (
         </button>
         <div className="header">Preferences</div>
         <div className="content">
+          <div className="preference-item">
+            <Toggle
+              id="show-senders"
+              defaultChecked={props.showSender}
+              onChange={(_e) => props.setShowSender()}
+            />
+            <label htmlFor="show-senders">Show Senders</label>
+          </div>
           <div className="preference-item">
             <p>Font Size</p>
             <Slider

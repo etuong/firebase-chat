@@ -2,6 +2,7 @@
 @import "~font-awesome/scss/font-awesome.scss";
 @import "~reactjs-popup/dist/index.css";
 @import "~rc-slider/assets/index.css";
+@import "~react-toggle/style.css";
 
 * {
   box-sizing: border-box;
@@ -93,7 +94,8 @@ body {
       padding: 20px;
       overflow-y: auto;
 
-      .chat-message {
+      .chat-message-wrapper {
+        position: relative;
         margin-bottom: 20px;
 
         &.flush-right {
@@ -102,6 +104,60 @@ body {
 
         &:last-child {
           margin-bottom: 0px;
+        }
+
+        .menu-options {
+          position: absolute;
+          right: 8px;
+          z-index: 999;
+
+          &:hover {
+            z-index: 999;
+          }
+
+          .arrow {
+            border: solid gray;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+
+            &.down {
+              transform: rotate(45deg);
+              -webkit-transform: rotate(45deg);
+            }
+          }
+        }
+
+        .chat-message {
+          border-radius: 12px;
+
+          .message-photo {
+            width: 250px;
+            padding: 6px;
+            background: white;
+            
+
+            &.my-message-photo {
+              background: #d9fdd3;
+            }
+          }
+
+          .message-text {
+            color: #444;
+            word-break: break-all;
+            padding: 3px 6px;
+            font-size: 14px;
+            display: inline-block;
+            position: relative;
+            text-align: left;
+            background: white;
+            box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.1);
+
+            &.my-message-text {
+              background: #d9fdd3;
+              box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+            }
+          }
         }
 
         .message-data {
@@ -123,23 +179,6 @@ body {
             font-weight: bold;
             margin: 5px;
             align-self: center;
-          }
-        }
-
-        .message {
-          color: #444;
-          padding: 3px 6px;
-          font-size: 14px;
-          border-radius: 7px;
-          display: inline-block;
-          position: relative;
-          text-align: left;
-          background: white;
-          box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.1);
-
-          &.my-message {
-            background: #d9fdd3;
-            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
           }
         }
       }
@@ -301,6 +340,43 @@ div.deliver {
   }
   100% {
     box-shadow: 0 0 0 10px rgba(23, 154, 29, 0.2);
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  background-image: none;
+  &.blue {
+    color: #0039e6;
+    border-color: #0039e6;
+  }
+  &.red {
+    color: #dc3545;
+    border-color: #dc3545;
+  }
+  &.yellow {
+    color: #ffc107;
+    border-color: #ffc107;
+  }
+  &.green {
+    color: green;
+    border-color: green;
+  }
+  &.black {
+    color: black;
+    border-color: black;
+  }
+  &.purple {
+    color: #800080;
+    border-color: #800080;
+  }
+  &.gray {
+    color: #999999;
+    border-color: #999999;
+  }
+  &.test {
+    color: #993333;
+    border-color: #993333;
   }
 }
 

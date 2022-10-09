@@ -5,7 +5,7 @@ const Questions = () => (
   <Popup
     contentStyle={{ width: "320px" }}
     trigger={
-      <button className="btn btn-outline-primary">
+      <button className="btn btn-outline purple" title="About App">
         <i className="fa fa-question"></i>
       </button>
     }
