@@ -2,20 +2,15 @@ import React, { memo, useState } from "react";
 import Webcam from "react-webcam";
 import Modal from "react-modal";
 
-const videoConstraints = {
-  width: 820,
-  height: 800,
-  facingMode: "user",
-};
-
 const customStyles = {
   content: {
     top: "50%",
     left: "50%",
     right: "auto",
     bottom: "auto",
-    marginRight: "-50%",
-    background: "whitesmoke",
+    padding: "0",
+    border: "none",
+    background: "transparent",
     transform: "translate(-50%, -50%)",
   },
 };
@@ -37,18 +32,14 @@ const WebCamera = ({ isModalOpen, setIsModalOpen, callback }) => {
       isOpen={isModalOpen}
       onRequestClose={() => setIsModalOpen(false)}
       style={customStyles}
-      contentLabel="Example Modal"
     >
       <div className="webcam-container">
         <div className="webcam-image">
           {selfie === "" ? (
             <Webcam
               audio={false}
-              height={380}
               ref={webcamRef}
               screenshotFormat="image/jpeg"
-              width={420}
-              videoConstraints={videoConstraints}
             />
           ) : (
             <img src={selfie} alt="" />
@@ -62,7 +53,7 @@ const WebCamera = ({ isModalOpen, setIsModalOpen, callback }) => {
                   e.preventDefault();
                   setSelfie("");
                 }}
-                className="webcam-btn btn btn-outline-danger"
+                className="webcam-btn btn btn-danger"
               >
                 Retake Selfie
               </button>
@@ -73,7 +64,7 @@ const WebCamera = ({ isModalOpen, setIsModalOpen, callback }) => {
                   setSelfie("");
                   setIsModalOpen(false);
                 }}
-                className="webcam-btn btn btn-outline-success"
+                className="webcam-btn btn btn-success"
               >
                 Send Selfie
               </button>
@@ -84,7 +75,7 @@ const WebCamera = ({ isModalOpen, setIsModalOpen, callback }) => {
                 e.preventDefault();
                 capture();
               }}
-              className="webcam-btn btn btn-outline-info"
+              className="webcam-btn btn btn-info"
             >
               Capture
             </button>

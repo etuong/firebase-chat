@@ -20,6 +20,7 @@ const Messages = ({ fontSize, showSender }) => {
       {messages.map((message, index) => {
         const { uid, text, displayName, timestamp } = message;
         let audioSource = undefined;
+        const fromMe = uid === user.uid;
 
         if (isAudio(text)) {
           audioSource = text.split(";");
@@ -30,11 +31,11 @@ const Messages = ({ fontSize, showSender }) => {
         return (
           <div
             key={index}
-            className={`chat-message-wrapper ${
-              uid === user.uid ? "own-message" : ""
-            }`}
+            className={`chat-message-wrapper ${fromMe ? "own-message" : ""}`}
           >
-            <div className="chat-message">
+            <div
+              className={`chat-message ${audioSource ? "negate-pseudo" : ""}`}
+            >
               {audioSource ? (
                 <audio controls>
                   <source src={audioSource} type="audio/mp3" />
@@ -44,9 +45,11 @@ const Messages = ({ fontSize, showSender }) => {
               ) : (
                 <Message text={text} fontSize={fontSize} />
               )}
-              <span className="menu-options">
-                <i className="fa fa-arrow-down fa-lg"></i>
-              </span>
+              {fromMe && (
+                <span className="menu-options">
+                  <i className="fa fa-times fa-lg delete"></i>
+                </span>
+              )}
             </div>
 
             {showSender && (

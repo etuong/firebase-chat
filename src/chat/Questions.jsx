@@ -1,13 +1,19 @@
 import React from "react";
 import Popup from "reactjs-popup";
+import ReactTooltip from "react-tooltip";
 
 const Questions = () => (
   <Popup
     contentStyle={{ width: "320px" }}
     trigger={
-      <button className="btn btn-outline purple" title="About App">
-        <i className="fa fa-question"></i>
-      </button>
+      <div>
+        <button className="btn btn-outline purple" data-tip data-for="faqs">
+          <i className="fa fa-question"></i>
+        </button>
+        <ReactTooltip id="faqs" place="bottom" effect="solid">
+          About App
+        </ReactTooltip>
+      </div>
     }
     position="bottom right"
     nested

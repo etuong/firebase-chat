@@ -9,6 +9,7 @@ import firebase, { sendImage } from "../services/Firebase";
 import useAuth from "../hooks/useAuth";
 import { isAudio } from "../utility/AudioUtility";
 import { useMessages } from "../hooks/useMessages";
+import ReactTooltip from "react-tooltip";
 
 const Features = ({
   messageBoxRef,
@@ -91,7 +92,8 @@ const Features = ({
       <button
         className="btn btn-outline brown"
         onClick={() => handleGeoLocation()}
-        title="Send Location"
+        data-tip
+        data-for="location"
       >
         <i className="fa fa-map-marker"></i>
       </button>
@@ -99,14 +101,16 @@ const Features = ({
       <button
         className="btn btn-outline black"
         onClick={() => setIsModalOpen(true)}
-        title="Take Selfie"
+        data-tip
+        data-for="selfie"
       >
         <i className="fa fa-camera"></i>
       </button>
 
       <button
         className="btn btn-outline blue image-picker-button"
-        title="Send Picture"
+        data-tip
+        data-for="picture"
       >
         <label className="image-picker-label" htmlFor={imagePickerId}>
           <i className="fa fa-image"></i>
@@ -116,7 +120,8 @@ const Features = ({
       <button
         className="btn btn-outline green"
         onClick={() => setShowPicker((val) => !val)}
-        title="Send Emoji"
+        data-tip
+        data-for="emoji"
       >
         <i className="fa fa-smile-o"></i>
       </button>
@@ -131,7 +136,8 @@ const Features = ({
       <button
         className="btn btn-outline yellow"
         onClick={(_e) => handleSaveChat()}
-        title="Save Chat"
+        data-tip
+        data-for="chat"
       >
         <i className="fa fa-file-text-o"></i>
       </button>
@@ -141,10 +147,31 @@ const Features = ({
       <button
         className="btn btn-outline gray"
         onClick={(_e) => firebase.auth().signOut()}
-        title="Sign Out"
+        style={{ border: "none" }}
+        data-tip
+        data-for="out"
       >
         <i className="fa fa-sign-out"></i>
       </button>
+
+      <ReactTooltip id="location" place="bottom" effect="solid">
+        Send Location
+      </ReactTooltip>
+      <ReactTooltip id="selfie" place="bottom" effect="solid">
+        Take Selfie
+      </ReactTooltip>
+      <ReactTooltip id="picture" place="bottom" effect="solid">
+        Send Picture
+      </ReactTooltip>
+      <ReactTooltip id="emoji" place="bottom" effect="solid">
+        Send Emoji
+      </ReactTooltip>
+      <ReactTooltip id="chat" place="bottom" effect="solid">
+        Save Chat
+      </ReactTooltip>
+      <ReactTooltip id="out" place="bottom" effect="solid">
+        Sign Out
+      </ReactTooltip>
     </div>
   );
 };
