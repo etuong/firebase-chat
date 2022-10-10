@@ -1,13 +1,23 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { useMessages } from "../hooks/useMessages";
 import Message from "./Message";
 import { isAudio } from "../utility/AudioUtility";
+import { isImageLink } from "../utility/ImageUtility";
 
 const Messages = ({ fontSize, showSender }) => {
   const chatBoxRef = useRef();
   const { user } = useAuth();
   const messages = useMessages();
+
+  useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scroll({
+        top: chatBoxRef.current.scrollHeight + 400,
+        behavior: "smooth",
+      });
+    }
+  }, []);
 
   useLayoutEffect(() => {
     if (chatBoxRef.current) {
@@ -20,12 +30,15 @@ const Messages = ({ fontSize, showSender }) => {
       {messages.map((message, index) => {
         const { uid, text, displayName, timestamp } = message;
         let audioSource = undefined;
+        let isImage = false;
         const fromMe = uid === user.uid;
 
         if (isAudio(text)) {
           audioSource = text.split(";");
           audioSource[0] = "data:audio/mp3;";
           audioSource = audioSource[0] + audioSource[1];
+        } else if (isImageLink(text)) {
+          isImage = true;
         }
 
         return (
@@ -34,7 +47,9 @@ const Messages = ({ fontSize, showSender }) => {
             className={`chat-message-wrapper ${fromMe ? "own-message" : ""}`}
           >
             <div
-              className={`chat-message ${audioSource ? "negate-pseudo" : ""}`}
+              className={`chat-message ${
+                audioSource || isImage ? "negate-pseudo" : ""
+              }`}
             >
               {audioSource ? (
                 <audio controls>
@@ -43,7 +58,11 @@ const Messages = ({ fontSize, showSender }) => {
                   Your browser does not support the audio element.
                 </audio>
               ) : (
-                <Message text={text} fontSize={fontSize} />
+                <Message
+                  text={text}
+                  fontSize={fontSize}
+                  isImageLink={isImage}
+                />
               )}
               {fromMe && (
                 <span className="menu-options">

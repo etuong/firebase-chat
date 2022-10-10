@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import { isImageLink } from "../utility/ImageUtility";
 
 const renderImageMessage = (text) => {
   return (
@@ -19,10 +18,10 @@ const cleanseMessage = (text) => {
     .replaceAll("\n", "<br/>");
 };
 
-const Message = ({ text, fontSize }) => {
+const Message = ({ text, fontSize, isImageLink }) => {
   return (
     <>
-      {isImageLink(text) ? (
+      {isImageLink ? (
         renderImageMessage(text)
       ) : (
         <span
