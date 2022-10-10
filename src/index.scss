@@ -98,48 +98,47 @@ body {
         position: relative;
         margin-bottom: 20px;
 
-        &.flush-right {
+        &.own-message {
           text-align: end;
+
+          .message-photo,
+          audio {
+            background: #d9fdd3;
+          }
+
+          .message-text {
+            background: #d9fdd3;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+          }
+
+          .message-data {
+            flex-direction: row-reverse;
+          }
         }
 
         &:last-child {
           margin-bottom: 0px;
         }
 
-        .menu-options {
-          position: absolute;
-          right: 8px;
-          z-index: 999;
-
+        .chat-message {
           &:hover {
-            z-index: 999;
-          }
-
-          .arrow {
-            border: solid gray;
-            border-width: 0 3px 3px 0;
-            display: inline-block;
-            padding: 3px;
-
-            &.down {
-              transform: rotate(45deg);
-              -webkit-transform: rotate(45deg);
+            .menu-options {
+              display: inline;
             }
           }
-        }
 
-        .chat-message {
-          border-radius: 12px;
+          .menu-options {
+            position: absolute;
+            color: gray;
+            display: none;
+          }
 
-          .message-photo {
+          .message-photo,
+          audio {
             width: 250px;
             padding: 6px;
             background: white;
-            
-
-            &.my-message-photo {
-              background: #d9fdd3;
-            }
+            border-radius: 12px;
           }
 
           .message-text {
@@ -147,25 +146,17 @@ body {
             word-break: break-all;
             padding: 3px 6px;
             font-size: 14px;
+            border-radius: 7px;
             display: inline-block;
             position: relative;
             text-align: left;
             background: white;
             box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.1);
-
-            &.my-message-text {
-              background: #d9fdd3;
-              box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-            }
           }
         }
 
         .message-data {
           display: flex;
-
-          &.justify-right {
-            flex-direction: row-reverse;
-          }
 
           .message-data-time {
             color: #434651;
@@ -371,10 +362,10 @@ div.deliver {
     border-color: #800080;
   }
   &.gray {
-    color: #999999;
-    border-color: #999999;
+    color: #ff9966;
+    border-color: #ff9966;
   }
-  &.test {
+  &.brown {
     color: #993333;
     border-color: #993333;
   }

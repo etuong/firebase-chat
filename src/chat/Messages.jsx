@@ -19,7 +19,6 @@ const Messages = ({ fontSize, showSender }) => {
     <div className="chat-box m-b-0" ref={chatBoxRef}>
       {messages.map((message, index) => {
         const { uid, text, displayName, timestamp } = message;
-        const fromMe = uid === user.uid;
         let audioSource = undefined;
 
         if (isAudio(text)) {
@@ -31,24 +30,27 @@ const Messages = ({ fontSize, showSender }) => {
         return (
           <div
             key={index}
-            className={["chat-message-wrapper", fromMe && "flush-right"].join(" ")}
-          >            
-            {audioSource ? (
-              <audio controls>
-                <source src={audioSource} type="audio/mp3" />
-                <source src={audioSource} type="audio/wav" />
-                Your browser does not support the audio element.
-              </audio>
-            ) : (
-              <Message text={text} fromMe={fromMe} fontSize={fontSize} />
-            )}
+            className={`chat-message-wrapper ${
+              uid === user.uid ? "own-message" : ""
+            }`}
+          >
+            <div className="chat-message">
+              {audioSource ? (
+                <audio controls>
+                  <source src={audioSource} type="audio/mp3" />
+                  <source src={audioSource} type="audio/wav" />
+                  Your browser does not support the audio element.
+                </audio>
+              ) : (
+                <Message text={text} fontSize={fontSize} />
+              )}
+              <span className="menu-options">
+                <i className="fa fa-arrow-down fa-lg"></i>
+              </span>
+            </div>
 
             {showSender && (
-              <span
-                className={["message-data", fromMe && "justify-right"].join(
-                  " "
-                )}
-              >
+              <span className="message-data">
                 <span className="message-data-sender-name">{displayName}</span>
                 <span className="message-data-time">{timestamp}</span>
               </span>

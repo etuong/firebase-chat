@@ -89,7 +89,7 @@ const Features = ({
       />
 
       <button
-        className="btn btn-outline test"
+        className="btn btn-outline brown"
         onClick={() => handleGeoLocation()}
         title="Send Location"
       >
@@ -97,7 +97,7 @@ const Features = ({
       </button>
 
       <button
-        className="btn btn-outline gray"
+        className="btn btn-outline black"
         onClick={() => setIsModalOpen(true)}
         title="Take Selfie"
       >
@@ -139,7 +139,7 @@ const Features = ({
       <Questions />
 
       <button
-        className="btn btn-outline black"
+        className="btn btn-outline gray"
         onClick={(_e) => firebase.auth().signOut()}
         title="Sign Out"
       >

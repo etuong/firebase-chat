@@ -1,13 +1,13 @@
 import React, { memo } from "react";
 import { isImageLink } from "../utility/ImageUtility";
 
-const renderImageMessage = (text, fromMe) => {
+const renderImageMessage = (text) => {
   return (
     <a target="_blank" href={text} rel="noreferrer">
       <img
         src={text}
         alt=""
-        className={["message-photo", fromMe && "my-message-photo"].join(" ")}
+        className="message-photo"
       />
     </a>
   );
@@ -19,24 +19,21 @@ const cleanseMessage = (text) => {
     .replaceAll("\n", "<br/>");
 };
 
-const Message = ({ text, fromMe, fontSize }) => {
+const Message = ({ text, fontSize }) => {
   return (
-    <div className="chat-message">
+    <>
       {isImageLink(text) ? (
-        renderImageMessage(text, fromMe)
+        renderImageMessage(text)
       ) : (
         <span
-          className={["message-text", fromMe && "my-message-text"].join(" ")}
+          className="message-text"
           style={{ fontSize: `${fontSize}` }}
           dangerouslySetInnerHTML={{
             __html: cleanseMessage(text),
           }}
         ></span>
       )}
-      <span className="menu-options">
-        <i class="arrow down"></i>
-      </span>
-    </div>
+    </>
   );
 };
 
