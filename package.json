@@ -2,6 +2,9 @@
   "name": "chat-with-me-client",
   "version": "1.0.0",
   "private": true,
+  "author": {
+    "name": "Ethan Uong"
+  },
   "dependencies": {
     "@firebase/app-compat": "^0.1.35",
     "@firebase/auth-compat": "^0.2.21",
@@ -12,7 +15,6 @@
     "firebase": "^9.10.0",
     "firebaseui": "^0.600.0",
     "font-awesome": "^4.7.0",
-    "nanoid": "^4.0.0",
     "rc-slider": "^10.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -22,12 +24,12 @@
     "react-tooltip": "^4.2.21",
     "react-webcam": "^7.0.1",
     "reactjs-popup": "^2.0.5",
-    "sass": "^1.54.0",
-    "sweetalert2": "^11.4.26"
+    "sass": "^1.54.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
@@ -46,5 +48,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/etuong/firebase-chat.git"
   }
 }
