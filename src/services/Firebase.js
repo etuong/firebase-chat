@@ -20,7 +20,9 @@ import {
   uploadString,
 } from "firebase/storage";
 
-const db_collection = process.env.NODE === "production" ? "messages" : "test";
+const db_collection = process.env.NODE_ENV  === "production" ? "messages" : "test";
+const redirectOnSuccessAuth =
+  process.env.NODE_ENV  === "production" ? "/firebase-chat/" : "/";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -35,7 +37,7 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export const uiConfig = {
-  signInSuccessUrl: "/",
+  signInSuccessUrl: redirectOnSuccessAuth,
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
