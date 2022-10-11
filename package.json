@@ -5,6 +5,7 @@
   "author": {
     "name": "Ethan Uong"
   },
+  "homepage": "https://etuong.github.io/firebase-chat/",
   "dependencies": {
     "@firebase/app-compat": "^0.1.35",
     "@firebase/auth-compat": "^0.2.21",
