@@ -100,6 +100,20 @@ body {
         margin-bottom: 20px;
         width: fit-content;
 
+        .menu-options {
+          position: absolute;
+          display: none;
+          .delete {
+            color: #dc3545;
+            cursor: pointer;
+          }
+        }
+
+        &:hover {
+          .menu-options {
+            display: inline;
+          }
+        }
         &.own-message {
           width: auto;
           text-align: end;
@@ -149,24 +163,8 @@ body {
             content: "";
           }
 
-          &:hover {
-            .menu-options {
-              display: inline;
-              .delete {
-                color: #dc3545;
-                cursor: pointer;
-              }
-            }
-          }
-
           &.negate-pseudo::after {
             content: none;
-          }
-
-          .menu-options {
-            position: absolute;
-            color: gray;
-            display: none;
           }
 
           .message-photo,

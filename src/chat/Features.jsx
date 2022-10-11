@@ -2,7 +2,7 @@ import EmojiPicker from "emoji-picker-react";
 import FileSaver from "file-saver";
 import ImagePicker from "./ImagePicker";
 import Preferences from "./Preferences";
-import Questions from "./Questions";
+import About from "./About";
 import React, { memo, useId, useState } from "react";
 import WebCamera from "./WebCamera";
 import firebase, { sendImage } from "../services/Firebase";
@@ -142,7 +142,7 @@ const Features = ({
         <i className="fa fa-file-text-o"></i>
       </button>
 
-      <Questions />
+      <About />
 
       <button
         className="btn btn-outline gray"

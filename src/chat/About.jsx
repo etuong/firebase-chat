@@ -2,7 +2,7 @@ import React from "react";
 import Popup from "reactjs-popup";
 import ReactTooltip from "react-tooltip";
 
-const Questions = () => (
+const About = () => (
   <Popup
     contentStyle={{ width: "320px" }}
     trigger={
@@ -33,11 +33,17 @@ const Questions = () => (
             other out.
           </p>
           <p>
-            Messages are stored on my Firebase server and will be deleted
-            monthly. Your information is absolutely anonymous.
+            This app is built using React and Firebase. It supports multiple
+            authentications such as Google, Facebook, or Twitter.
           </p>
           <p>
-            This web app was designed and built by{" "}
+            Messages are stored on my Firebase server and will be deleted
+            monthly. You can also delete your own messages by clicking on the X
+            icon next to your messages. Your information is absolutely
+            anonymous.
+          </p>
+          <p>
+            This project was designed and built by{" "}
             <a
               href="https://www.ethanuong.com"
               target="_blank"
@@ -45,8 +51,7 @@ const Questions = () => (
             >
               Ethan Uong
             </a>
-            . If you are a developer and would like to contribute to this
-            project, please visit the{" "}
+            . If you are a developer and would like to contribute, please visit the{" "}
             <a
               href="https://github.com/etuong/firebase-chat"
               target="_blank"
@@ -71,4 +76,4 @@ const Questions = () => (
   </Popup>
 );
 
-export default Questions;
+export default About;

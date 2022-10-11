@@ -4,6 +4,7 @@ import { useMessages } from "../hooks/useMessages";
 import Message from "./Message";
 import { isAudio } from "../utility/AudioUtility";
 import { isImageLink } from "../utility/ImageUtility";
+import { deleteMessage } from "../services/Firebase";
 
 const Messages = ({ fontSize, showSender }) => {
   const chatBoxRef = useRef();
@@ -13,7 +14,7 @@ const Messages = ({ fontSize, showSender }) => {
   useEffect(() => {
     if (chatBoxRef.current) {
       chatBoxRef.current.scroll({
-        top: chatBoxRef.current.scrollHeight + 400,
+        top: chatBoxRef.current.scrollHeight + 100,
         behavior: "smooth",
       });
     }
@@ -28,7 +29,7 @@ const Messages = ({ fontSize, showSender }) => {
   return (
     <div className="chat-box m-b-0" ref={chatBoxRef}>
       {messages.map((message, index) => {
-        const { uid, text, displayName, timestamp } = message;
+        const { id, uid, text, displayName, timestamp } = message;
         let audioSource = undefined;
         let isImage = false;
         const fromMe = uid === user.uid;
@@ -65,7 +66,10 @@ const Messages = ({ fontSize, showSender }) => {
                 />
               )}
               {fromMe && (
-                <span className="menu-options">
+                <span
+                  className="menu-options"
+                  onClick={() => deleteMessage(id)}
+                >
                   <i className="fa fa-times fa-lg delete"></i>
                 </span>
               )}

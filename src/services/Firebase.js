@@ -1,11 +1,13 @@
 import firebase from "firebase/compat/app";
 import {
-  getFirestore,
-  collection,
   addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getFirestore,
   onSnapshot,
-  query,
   orderBy,
+  query,
   serverTimestamp,
 } from "firebase/firestore";
 import * as firebaseui from "firebaseui";
@@ -17,6 +19,8 @@ import {
   getDownloadURL,
   uploadString,
 } from "firebase/storage";
+
+const db_collection = process.env.NODE === "production" ? "messages" : "test";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -70,7 +74,7 @@ export const sendImage = async (user, image) => {
 
 export const sendMessage = async (user, text) => {
   try {
-    await addDoc(collection(db, "messages"), {
+    await addDoc(collection(db, db_collection), {
       uid: user.uid,
       displayName: user.displayName,
       text: text.trim(),
@@ -90,9 +94,15 @@ export const sendMessage = async (user, text) => {
   }
 };
 
+export const deleteMessage = async (messageId) => {
+  await deleteDoc(doc(db, db_collection, messageId)).then(() => {
+    console.log(`Message ${messageId} has been deleted successfully.`);
+  });
+};
+
 export const getMessages = (callback) => {
   return onSnapshot(
-    query(collection(db, "messages"), orderBy("serverTimestamp", "asc")),
+    query(collection(db, db_collection), orderBy("serverTimestamp", "asc")),
     (querySnapshot) => {
       const messages = querySnapshot.docs.map((doc) => ({
         id: doc.id,
