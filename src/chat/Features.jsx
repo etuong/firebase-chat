@@ -1,10 +1,10 @@
 import EmojiPicker from "emoji-picker-react";
 import FileSaver from "file-saver";
-import ImagePicker from "./ImagePicker";
+import ImagePicker from "../components/ImagePicker";
 import Preferences from "./Preferences";
 import About from "./About";
 import React, { memo, useId, useState } from "react";
-import WebCamera from "./WebCamera";
+import WebCamera from "../components/WebCamera";
 import firebase, { sendImage } from "../services/Firebase";
 import useAuth from "../hooks/useAuth";
 import { isAudio } from "../utility/AudioUtility";
