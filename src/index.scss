@@ -89,10 +89,12 @@ body {
   }
 
   .chat-box {
-    padding: 20px 0px;
+    padding-top: 20px;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 
     .chat-message-wrapper {
       position: relative;
@@ -205,62 +207,65 @@ body {
         }
       }
     }
-  }
 
-  .typing {
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
+    .typing-container {
+      margin-top: auto;
+      .typing {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
 
-    .typist {
-      font-size: 14px;
-      font-style: italic;
-    }
-
-    .dots-container {
-      height: 30px;
-      display: flex;
-      align-items: center;
-      margin-left: 10px;
-
-      #dot1,
-      #dot2,
-      #dot3 {
-        width: 7px;
-        height: 7px;
-        background: #cacaca;
-        border-radius: 50%;
-        margin: 3px;
-        transition: all 0.5s ease-in-out;
-        animation: typing 1s infinite;
-      }
-
-      #dot1 {
-        animation-delay: 1s;
-      }
-
-      #dot2 {
-        animation-delay: 0.5s;
-      }
-
-      #dot3 {
-        animation-delay: 0.8s;
-      }
-
-      @keyframes typing {
-        0% {
-          transform: translateY(0);
-          transition: all 0.5s ease-in-out;
+        .typist {
+          font-size: 14px;
+          font-style: italic;
         }
 
-        50% {
-          transform: translateY(-5px);
-          transition: all 0.5s ease-in-out;
-        }
+        .dots-container {
+          height: 30px;
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
 
-        100% {
-          transform: translateY(0);
-          transition: all 0.5s ease-in-out;
+          #dot1,
+          #dot2,
+          #dot3 {
+            width: 7px;
+            height: 7px;
+            background: #cacaca;
+            border-radius: 50%;
+            margin: 3px;
+            transition: all 0.5s ease-in-out;
+            animation: typing 1s infinite;
+          }
+
+          #dot1 {
+            animation-delay: 1s;
+          }
+
+          #dot2 {
+            animation-delay: 0.5s;
+          }
+
+          #dot3 {
+            animation-delay: 0.8s;
+          }
+
+          @keyframes typing {
+            0% {
+              transform: translateY(0);
+              transition: all 0.5s ease-in-out;
+            }
+
+            50% {
+              transform: translateY(-5px);
+              transition: all 0.5s ease-in-out;
+            }
+
+            100% {
+              transform: translateY(0);
+              transition: all 0.5s ease-in-out;
+            }
+          }
         }
       }
     }

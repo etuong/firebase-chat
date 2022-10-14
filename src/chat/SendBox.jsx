@@ -68,7 +68,7 @@ const SendBox = (props) => {
   };
 
   return (
-    <div className="send-message">
+    <section className="send-message">
       <form onSubmit={handleSubmit}>
         <div className="input-group mb-0">
           <div
@@ -92,7 +92,7 @@ const SendBox = (props) => {
           </div>
         </div>
       </form>
-    </div>
+    </section>
   );
 };
 

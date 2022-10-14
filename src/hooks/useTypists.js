@@ -12,7 +12,7 @@ export const useTypists = () => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [user]);
 
   return typists;
 };

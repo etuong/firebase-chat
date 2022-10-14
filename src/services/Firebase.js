@@ -144,7 +144,7 @@ export const deleteTypist = async (typistId) => {
   }
 };
 
-export const getTypists = (callback, user) => {
+export const getTypists = (callback, {user}) => {
   return onSnapshot(
     query(collection(db, typistCollection)),
     (querySnapshot) => {
@@ -153,7 +153,12 @@ export const getTypists = (callback, user) => {
         ...doc.data(),
       }));
 
-      callback(typists.filter((typist) => typist.uid !== user.uid));
+      callback(
+        typists.filter((typist) => {
+          console.log(user)
+          return typist.uid !== user.uid;
+        })
+      );
     }
   );
 };

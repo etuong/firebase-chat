@@ -1,15 +1,18 @@
-import React, { useRef, useLayoutEffect, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
-import { useMessages } from "../hooks/useMessages";
 import Message from "./Message";
+import React, { useRef, useLayoutEffect, useEffect } from "react";
+import Typing from "../components/Typing";
+import useAuth from "../hooks/useAuth";
+import { deleteMessage } from "../services/Firebase";
 import { isAudio } from "../utility/AudioUtility";
 import { isImageLink } from "../utility/ImageUtility";
-import { deleteMessage } from "../services/Firebase";
+import { useMessages } from "../hooks/useMessages";
+import { useTypists } from "../hooks/useTypists";
 
 const Messages = ({ fontSize, showSender }) => {
   const chatBoxRef = useRef();
   const { user } = useAuth();
   const messages = useMessages();
+  const typists = useTypists();
 
   useEffect(() => {
     if (chatBoxRef.current) {
@@ -27,7 +30,7 @@ const Messages = ({ fontSize, showSender }) => {
   });
 
   return (
-    <div className="chat-box m-b-0" ref={chatBoxRef}>
+    <section className="chat-box m-b-0" ref={chatBoxRef}>
       {messages.map((message, index) => {
         const { id, uid, text, displayName, timestamp } = message;
         let audioSource = undefined;
@@ -84,7 +87,12 @@ const Messages = ({ fontSize, showSender }) => {
           </div>
         );
       })}
-    </div>
+      <div className="typing-container">
+        {typists?.map((typist, index) => (
+          <Typing key={index} typist={typist.displayName} />
+        ))}
+      </div>
+    </section>
   );
 };
 
