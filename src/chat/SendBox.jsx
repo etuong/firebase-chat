@@ -1,10 +1,17 @@
-import React, { memo, useState } from "react";
-import { sendMessage } from "../services/Firebase";
+import React, { memo, useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
+import useTyping from "../hooks/useTyping";
+import { addTypist, deleteTypist, sendMessage } from "../services/Firebase";
 
 const SendBox = (props) => {
   const { user } = useAuth();
   const [mediaRecorder, setMediaRecorder] = useState(undefined);
+  const { isTyping, startTyping, stopTyping, cancelTyping } = useTyping();
+
+  useEffect(() => {
+    if (isTyping) addTypist(user);
+    else deleteTypist(user.uid);
+  }, [isTyping, user]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,10 +19,12 @@ const SendBox = (props) => {
     if (messageField && messageField.value) {
       sendMessage(user, messageField.value);
       messageField.value = "";
+      cancelTyping();
     }
   };
 
   const onKeyDown = (e) => {
+    startTyping();
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
       handleSubmit(e);
@@ -75,6 +84,7 @@ const SendBox = (props) => {
             ref={props.messageBoxRef}
             className="form-control"
             placeholder="Enter message here..."
+            onKeyUp={stopTyping}
             onKeyDown={onKeyDown}
           />
           <div className="deliver" onClick={handleSubmit}>

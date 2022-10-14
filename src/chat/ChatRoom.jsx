@@ -4,11 +4,13 @@ import Messages from "./Messages";
 import React, { useRef, useState } from "react";
 import SendBox from "./SendBox";
 import Typing from "../components/Typing";
+import { useTypists } from "../hooks/useTypists";
 
 const ChatRoom = () => {
   const messageBoxRef = useRef();
   const [fontSize, setFontSize] = useState("16px");
   const [showSender, setShowSender] = useState(true);
+  const typists = useTypists();
 
   return (
     <div className="chat-app">
@@ -23,7 +25,9 @@ const ChatRoom = () => {
         />
       </div>
       <Messages fontSize={fontSize} showSender={showSender} />
-      <Typing typist={"Ethan Uong"} />
+      {typists?.map((typist, index) => (
+        <Typing key={index} typist={typist.displayName} />
+      ))}
       <SendBox messageBoxRef={messageBoxRef} />
     </div>
   );

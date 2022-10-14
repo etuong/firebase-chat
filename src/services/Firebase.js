@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import {
   addDoc,
+  getDocs,
   collection,
   deleteDoc,
   doc,
@@ -9,6 +10,7 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  where,
 } from "firebase/firestore";
 import * as firebaseui from "firebaseui";
 import "firebase/compat/auth";
@@ -20,9 +22,11 @@ import {
   uploadString,
 } from "firebase/storage";
 
-const db_collection = process.env.NODE_ENV  === "production" ? "messages" : "test";
+const typistCollection = "typists";
+const messageCollection =
+  process.env.NODE_ENV === "production" ? "messages" : "test";
 const redirectOnSuccessAuth =
-  process.env.NODE_ENV  === "production" ? "/firebase-chat/" : "/";
+  process.env.NODE_ENV === "production" ? "/firebase-chat/" : "/";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -76,7 +80,7 @@ export const sendImage = async (user, image) => {
 
 export const sendMessage = async (user, text) => {
   try {
-    await addDoc(collection(db, db_collection), {
+    await addDoc(collection(db, messageCollection), {
       uid: user.uid,
       displayName: user.displayName,
       text: text.trim(),
@@ -97,14 +101,16 @@ export const sendMessage = async (user, text) => {
 };
 
 export const deleteMessage = async (messageId) => {
-  await deleteDoc(doc(db, db_collection, messageId)).then(() => {
-    console.log(`Message ${messageId} has been deleted successfully.`);
-  });
+  if (messageId) {
+    await deleteDoc(doc(db, messageCollection, messageId)).then(() => {
+      console.log(`Message ${messageId} has been deleted successfully.`);
+    });
+  }
 };
 
 export const getMessages = (callback) => {
   return onSnapshot(
-    query(collection(db, db_collection), orderBy("serverTimestamp", "asc")),
+    query(collection(db, messageCollection), orderBy("serverTimestamp", "asc")),
     (querySnapshot) => {
       const messages = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -112,6 +118,42 @@ export const getMessages = (callback) => {
       }));
 
       callback(messages);
+    }
+  );
+};
+
+export const addTypist = async (typist) => {
+  try {
+    await addDoc(collection(db, typistCollection), {
+      uid: typist.uid,
+      displayName: typist.displayName,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteTypist = async (typistId) => {
+  if (typistId) {
+    const querySnapshot = await getDocs(
+      query(collection(db, typistCollection), where("uid", "==", typistId))
+    );
+    querySnapshot.forEach((snapshot) => {
+      deleteDoc(doc(db, typistCollection, snapshot.id));
+    });
+  }
+};
+
+export const getTypists = (callback, user) => {
+  return onSnapshot(
+    query(collection(db, typistCollection)),
+    (querySnapshot) => {
+      const typists = querySnapshot.docs.map((doc) => ({
+        uid: doc.uid,
+        ...doc.data(),
+      }));
+
+      callback(typists.filter((typist) => typist.uid !== user.uid));
     }
   );
 };

@@ -92,6 +92,7 @@ body {
     padding: 20px 0px;
     overflow-y: auto;
     overflow-x: hidden;
+    margin-bottom: auto;
 
     .chat-message-wrapper {
       position: relative;
@@ -210,7 +211,6 @@ body {
     display: flex;
     align-items: center;
     padding-left: 20px;
-    margin-top: auto;
 
     .typist {
       font-size: 14px;
