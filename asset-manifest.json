@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/firebase-chat/static/css/main.60d6dce8.css",
+    "main.css": "/firebase-chat/static/css/main.0bdf4e1b.css",
     "main.js": "/firebase-chat/static/js/main.0409b233.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/firebase-chat/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/firebase-chat/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -8,11 +8,11 @@
     "static/media/fontawesome-webfont.woff?v=4.7.0": "/firebase-chat/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/firebase-chat/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "index.html": "/firebase-chat/index.html",
-    "main.60d6dce8.css.map": "/firebase-chat/static/css/main.60d6dce8.css.map",
+    "main.0bdf4e1b.css.map": "/firebase-chat/static/css/main.0bdf4e1b.css.map",
     "main.0409b233.js.map": "/firebase-chat/static/js/main.0409b233.js.map"
   },
   "entrypoints": [
-    "static/css/main.60d6dce8.css",
+    "static/css/main.0bdf4e1b.css",
     "static/js/main.0409b233.js"
   ]
 }
