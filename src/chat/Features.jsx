@@ -5,7 +5,8 @@ import Preferences from "./Preferences";
 import About from "./About";
 import React, { memo, useId, useState } from "react";
 import WebCamera from "../components/WebCamera";
-import firebase, { sendImage } from "../services/Firebase";
+import { signOut } from 'firebase/auth';
+import auth, { sendImage } from "../services/Firebase";
 import useAuth from "../hooks/useAuth";
 import { isAudio } from "../utility/AudioUtility";
 import { useMessages } from "../hooks/useMessages";
@@ -146,7 +147,7 @@ const Features = ({
 
       <button
         className="btn btn-outline gray"
-        onClick={(_e) => firebase.auth().signOut()}
+        onClick={(_e) => signOut(auth)}
         style={{ border: "none" }}
         data-tip
         data-for="out"

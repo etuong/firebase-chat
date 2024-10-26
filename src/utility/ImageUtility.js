@@ -6,6 +6,6 @@ export const isImageLink = (text) => {
   return (
     text.includes("firebasestorage.googleapis") ||
     text.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp|webp)(\?(.*))?$/gim) !==
-      null
+    null
   );
 };

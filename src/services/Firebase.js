@@ -1,10 +1,17 @@
-import firebase from "firebase/compat/app";
+import { initializeApp } from "firebase/app";
+import {
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  OAuthProvider,
+  TwitterAuthProvider,
+  getAuth, signInWithPopup
+} from 'firebase/auth';
 import {
   addDoc,
-  getDocs,
   collection,
   deleteDoc,
   doc,
+  getDocs,
   getFirestore,
   onSnapshot,
   orderBy,
@@ -12,21 +19,19 @@ import {
   serverTimestamp,
   where,
 } from "firebase/firestore";
-import * as firebaseui from "firebaseui";
-import "firebase/compat/auth";
 import {
+  getDownloadURL,
   getStorage,
   ref,
   uploadBytes,
-  getDownloadURL,
   uploadString,
 } from "firebase/storage";
 
 const typistCollection = "typists";
 const messageCollection =
   process.env.NODE_ENV === "production" ? "messages" : "test";
-const redirectOnSuccessAuth =
-  process.env.NODE_ENV === "production" ? "/firebase-chat/" : "/";
+// const redirectOnSuccessAuth =
+//   process.env.NODE_ENV === "production" ? "/firebase-chat/" : "/";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -38,24 +43,21 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_measurementId,
 };
 
-const app = firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
-export const uiConfig = {
-  signInSuccessUrl: redirectOnSuccessAuth,
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    new firebase.auth.OAuthProvider("yahoo.com").providerId,
-    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-  ],
-};
-
-export const authUI = new firebaseui.auth.AuthUI(firebase.auth());
-
 const storage = getStorage();
+
+// Providers
+const googleProvider = new GoogleAuthProvider();
+const twitterProvider = new TwitterAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
+const yahooProvider = new OAuthProvider('yahoo.com');
+
+export const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
+export const loginWithTwitter = () => signInWithPopup(auth, twitterProvider);
+export const loginWithFacebook = () => signInWithPopup(auth, facebookProvider);
+export const loginWithYahoo = () => signInWithPopup(auth, yahooProvider);
 
 export const sendImage = async (user, image) => {
   const storageRef = ref(
@@ -144,7 +146,7 @@ export const deleteTypist = async (typistId) => {
   }
 };
 
-export const getTypists = (callback, {user}) => {
+export const getTypists = (callback, { user }) => {
   return onSnapshot(
     query(collection(db, typistCollection)),
     (querySnapshot) => {
@@ -163,4 +165,4 @@ export const getTypists = (callback, {user}) => {
   );
 };
 
-export default firebase;
+export default auth;

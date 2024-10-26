@@ -1,17 +1,21 @@
-import React, { useEffect } from "react";
-import { authUI, uiConfig } from "../services/Firebase";
+import React from "react";
+import {
+  loginWithGoogle,
+  loginWithTwitter,
+  loginWithFacebook,
+  loginWithYahoo,
+} from "../services/Firebase";
 
 const Authentication = () => {
-  useEffect(() => {
-    authUI.start("#firebaseui-auth-container", uiConfig);
-  }, []);
-
   return (
     <>
       <h4 style={{ textAlign: "center", paddingTop: "15px" }}>
-        Please sign in!
+        Please sign in! Excuse the bad UI for now..
       </h4>
-      <div id="firebaseui-auth-container"></div>
+      <button onClick={loginWithGoogle}>Login with Google</button>
+      <button onClick={loginWithTwitter}>Login with Twitter</button>
+      <button onClick={loginWithFacebook}>Login with Facebook</button>
+      <button onClick={loginWithYahoo}>Login with Yahoo</button>
     </>
   );
 };
