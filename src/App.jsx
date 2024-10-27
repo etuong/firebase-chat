@@ -7,7 +7,6 @@ function App() {
   const { user } = useAuth();
 
   return useMemo(() => {
-    console.log(user);
     return <>{user ? <ChatRoom /> : <Authentication />}</>;
   }, [user]);
 }

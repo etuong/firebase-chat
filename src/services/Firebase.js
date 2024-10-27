@@ -1,11 +1,13 @@
 import { initializeApp } from "firebase/app";
 import {
   FacebookAuthProvider,
+  GithubAuthProvider,
   GoogleAuthProvider,
   OAuthProvider,
   TwitterAuthProvider,
-  getAuth, signInWithPopup
-} from 'firebase/auth';
+  getAuth,
+  signInWithPopup,
+} from "firebase/auth";
 import {
   addDoc,
   collection,
@@ -28,10 +30,7 @@ import {
 } from "firebase/storage";
 
 const typistCollection = "typists";
-const messageCollection =
-  process.env.NODE_ENV === "production" ? "messages" : "test";
-// const redirectOnSuccessAuth =
-//   process.env.NODE_ENV === "production" ? "/firebase-chat/" : "/";
+const messageCollection = process.env.NODE_ENV === "production" ? "messages" : "test";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -52,12 +51,14 @@ const storage = getStorage();
 const googleProvider = new GoogleAuthProvider();
 const twitterProvider = new TwitterAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
-const yahooProvider = new OAuthProvider('yahoo.com');
+const yahooProvider = new OAuthProvider("yahoo.com");
+const githubProvider = new GithubAuthProvider();
 
 export const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
 export const loginWithTwitter = () => signInWithPopup(auth, twitterProvider);
 export const loginWithFacebook = () => signInWithPopup(auth, facebookProvider);
 export const loginWithYahoo = () => signInWithPopup(auth, yahooProvider);
+export const loginWithGithub = () => signInWithPopup(auth, githubProvider);
 
 export const sendImage = async (user, image) => {
   const storageRef = ref(
@@ -157,7 +158,7 @@ export const getTypists = (callback, { user }) => {
 
       callback(
         typists.filter((typist) => {
-          console.log(user)
+          console.log(user);
           return typist.uid !== user.uid;
         })
       );
